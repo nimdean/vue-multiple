@@ -84,12 +84,16 @@
 </template>
 
 <script>
+import indexedDB from '../assets/js/indexedDB.js';
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted(){
+    indexedDB.createDB('China',1);
   }
 }
 </script>

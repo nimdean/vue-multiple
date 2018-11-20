@@ -14,7 +14,8 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: path.resolve(__dirname,'../src/pages/index/main.js'),
-    admin: path.resolve(__dirname,'../src/pages/admin/main.js')
+    admin: path.resolve(__dirname,'../src/pages/admin/main.js'),
+    login: path.resolve(__dirname,'../src/pages/login/main.js'),
   },
   output: {
     path: config.build.assetsRoot,

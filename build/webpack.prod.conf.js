@@ -62,7 +62,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.build.index,
-      template: './src/pages/index/index.html',
+      template: './src/pages/index/index.ejs',
+      favicon:'./static/img/favicon.ico',
       inject: true,
       minify: {
         removeComments: true,
@@ -73,11 +74,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      excludeChunks: ['admin'] // 打包时排除掉的代码块
+      chunks:['manifest','vendor','app'],
+      excludeChunks: ['admin','login'] // 打包时排除掉的代码块
     }),
     new HtmlWebpackPlugin({
       filename: config.build.admin,
-      template: './src/pages/admin/admin.html',
+      template: './src/pages/admin/admin.ejs',
+      favicon:'./static/img/favicon.ico',
       inject: true,
       minify: {
         removeComments: true,
@@ -88,7 +91,25 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      excludeChunks: ['app'] // 打包时排除掉的代码块
+      chunks:['manifest','vendor','admin'],
+      excludeChunks: ['app','login'] // 打包时排除掉的代码块
+    }),
+    new HtmlWebpackPlugin({
+      filename: config.build.login,
+      template: './src/pages/login/login.ejs',
+      favicon:'./static/img/favicon.ico',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+      chunks:['manifest','vendor','login'],
+      excludeChunks: ['app','admin'] // 打包时排除掉的代码块
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),

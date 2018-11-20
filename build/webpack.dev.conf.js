@@ -53,16 +53,28 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({ // index.html的配置
-      filename: 'index.html',
-      template: './src/pages/index/index.html',
+      filename: config.build.index,
+      template: './src/pages/index/index.ejs',
+      favicon:'./static/img/favicon.ico',
       inject: true,
-      chunks:['app'] // 相应的代码块名称
+      chunks:['app'], // 相应的代码块名称
+      excludeChunks:['admin','login'] // 需排除的代码块
     }),
     new HtmlWebpackPlugin({ // admin.html的配置
-      filename: 'admin.html',
-      template: './src/pages/admin/admin.html',
+      filename: config.build.admin,
+      template: './src/pages/admin/admin.ejs',
+      favicon:'./static/img/favicon.ico',
       inject: true,
-      chunks:['admin'] // 相应的代码块名称
+      chunks:['admin'], // 相应的代码块名称
+      excludeChunks:['app','login'] // 需排除的代码块
+    }),
+    new HtmlWebpackPlugin({ // login.html的配置
+      filename: config.build.login,
+      template: './src/pages/login/login.ejs',
+      favicon:'./static/img/favicon.ico',
+      inject: true,
+      chunks:['login'], // 相应的代码块名称
+      excludeChunks:['admin','app'] // 需排除的代码块
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

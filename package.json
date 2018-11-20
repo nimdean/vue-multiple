@@ -10,6 +10,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "echarts": "^4.2.0-rc.2",
+    "echarts-gl": "^1.1.1",
+    "ejs": "^2.6.1",
+    "element-ui": "^2.4.9",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
